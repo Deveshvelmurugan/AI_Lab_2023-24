@@ -1,15 +1,90 @@
-# Ex.No: 10 Learning – Use Supervised Learning  
-### DATE:                                                                            
-### REGISTER NUMBER : 
-### AIM: 
-To write a program to train the classifier for -----------------.
-###  Algorithm:
+#Ex. No: 13 Student performance prediction using machine learning
+
+### NAME: Devesh V 
+### REGISTER NUMBER: 212223060045
+
+### AIM:
+
+To write a program to train the classifier for Student performance prediction using machine learning
+
+### Algorithm:
+
+1. Load the dataset from CSV
+
+2.Clean the data (remove ID, encode text fields)
+
+3. Label students as High or Low Performer based on CGPA 23.0
+
+4.Split data into training and testing sets
+
+5. Train a Random Forest Classifier model
+
+6. Evaluate the model's accuracy
+
+7. Take user input (program, gender, CGPA levels, etc.)
+
+8. Predict student performance using the trained model
+
+9.Display result (High Performer / Low Performer)
 
 ### Program:
-
-
+```
+pip install pandas scikit-learn
+import pandas as pd
+from sklearn.model_selection import train test_split
+from sklearn.ensemble import Random ForestClassifier
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score, classification_report
+#Load dataset
+df pd.read_csv("academic_performance_dataset_V2.csv")
+#Clean and preprocess
+df_clean df.drop(columns=['ID No'])
+df_clean['High_Performer'] = (df_clean['CGPA'] >= 3.0).astype(int)
+df_cleandf_clean.drop(columns=['CGPA'])
+le_gender LabelEncoder()
+le prog LabelEncoder()
+df_clean['Gender'] = le_gender.fit_transform(df_clean['Gender'])
+df_clean['Prog Code'] = le_prog.fit_transform(df_clean ['Prog Code'])
+X = df_clean.drop(columns=['High_Performer'])
+y = df_clean['High_Performer']
+X_train, X_test, y_train, y_test train_test_split(X, y, test_size=0.2, random_state=42)
+clf Random ForestClassifier(random_state=42)
+clf.fit(X_train, y_train)
+# Accuracy check (optional)
+y_pred clf.predict(X_test)
+print("Model Accuracy: {:.2f}%".format(accuracy_score(y_test, y_pred) * 100))
+#---------------------------------------
+#Get Real-Time User Input
+#---------------------------------------
+print("\nEnter the following student details:")
+prog_input input("Program Code (e.g., ICE, BCH): ")
+gender_input input("Gender (Male/Female): ")
+yog_input int(input("Year of Graduation: "))
+cgpa100 float(input("CGPA in 100 level: "))
+cgpa200 float(input("CGPA in 200 level: "))
+cgpa300 float(input("CGPA in 300 level: "))
+cgpa400 float(input("CGPA in 400 level: "))
+sgpa_input = float(input("Last Semester SGPA: "))
+#Encode inputs
+gender_encoded le_gender.transform([gender_input])[0]
+prog_encoded le_prog.transform([prog_input])[0]
+# Prepare input for model
+user_data pd. DataFrame ([[
+prog_encoded,
+gender_encoded,
+yog_input,
+cgpa100,
+cgpa200,
+cgpa300,
+cgpa400,
+sgpa_input
+]], columns=X.columns)
+# Predict
+user_pred = clf.predict(user_data) [0]
+result = High Performer if user_pred == 1 else Low Performer
+print(f"\n Prediction Result: {result}")
+```
 ### Output:
-
 
 ### Result:
 Thus the system was trained successfully and the prediction was carried out.
